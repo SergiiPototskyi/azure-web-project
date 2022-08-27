@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "SbConnection": "Endpoint=sb://servicebussp.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=0kOFI1IUBBrCp5c0E4tOBfG4GiBW/8bbLzSBwXubh4U=",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "StorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=orderstoragesp;AccountKey=ZuWRVuexu1KVPr9fkvYThm7L2M9e+NO5E2yYc3yRR8dvwMPh/FyEq5w7vzKEuroMKsx5KiNpky8++ASticnVPA==;EndpointSuffix=core.windows.net",
+    "ContainerName": "order-items"
+  }
+}

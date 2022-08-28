@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
@@ -56,6 +58,7 @@ public class OrderService : IOrderService
         var order = new Order(basket.BuyerId, shippingAddress, items);
 
         await _orderRepository.AddAsync(order);
+        await SaveOrdeDetailsAsync(order);
     }
 
     public async Task ReserveOrderItems(int orderId, IEnumerable<BasketItem> items)
@@ -78,5 +81,15 @@ public class OrderService : IOrderService
 
         // Send the message to the queue.
         await sender.SendMessageAsync(message);
+    }
+
+    private async Task SaveOrdeDetailsAsync(Order order)
+    {
+        var uri = _configuration.GetConnectionString("DeliveryProcessorUri");
+        var client = new HttpClient();
+
+        var json = JsonSerializer.Serialize(order);
+        var data = new StringContent(json, Encoding.UTF8, "application/json");
+        await client.PostAsync(uri, data);
     }
 }
